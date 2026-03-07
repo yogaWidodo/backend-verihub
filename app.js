@@ -32,7 +32,7 @@ const forwardResponse = (res, axiosResponse) => {
 };
 
 // Use raw body for liveness and deepfake to preserve bit-parity for checksums
-app.post("/liveness", express.raw({ type: '*/*' }), async (req, res) => {
+app.post("/liveness", express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
     try {
         const response = await axios.post(
             "https://api.verihubs.com/v1/face/liveness",
@@ -58,7 +58,7 @@ app.post("/liveness", express.raw({ type: '*/*' }), async (req, res) => {
     }
 });
 
-app.post("/deepfake", express.raw({ type: '*/*' }), async (req, res) => {
+app.post("/deepfake", express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
     try {
         const response = await axios.post(
             "https://api.verihubs.com/v1/face/deepfake",
@@ -84,7 +84,7 @@ app.post("/deepfake", express.raw({ type: '*/*' }), async (req, res) => {
     }
 });
 
-app.post("/:license_id/check", express.raw({ type: '*/*' }), async (req, res) => {
+app.post("/:license_id/check", express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
     try {
         const { license_id } = req.params;
         const response = await axios.post(
@@ -107,7 +107,7 @@ app.post("/:license_id/check", express.raw({ type: '*/*' }), async (req, res) =>
     }
 });
 
-app.post("/generate-key", express.raw({ type: '*/*' }), async (req, res) => {
+app.post("/generate-key", express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
     try {
         const response = await axios.post(
             "https://api.verihubs.com/v1/encryption/generate-key",
