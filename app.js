@@ -84,7 +84,7 @@ app.post("/deepfake", express.raw({ type: '*/*', limit: '50mb' }), async (req, r
     }
 });
 
-app.post("/:license_id/check", express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
+app.post("/:license_id/check", express.json(), async (req, res) => {   
     try {
         const { license_id } = req.params;
         const response = await axios.post(
@@ -107,7 +107,7 @@ app.post("/:license_id/check", express.raw({ type: '*/*', limit: '50mb' }), asyn
     }
 });
 
-app.post("/generate-key", express.raw({ type: '*/*', limit: '50mb' }), async (req, res) => {
+app.post("/generate-key", express.json(), async (req, res) => {    
     try {
         const response = await axios.post(
             "https://api.verihubs.com/v1/encryption/generate-key",
